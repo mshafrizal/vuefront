@@ -10,7 +10,7 @@ export const useAuthStore = defineStore({
   }),
   getters: {
     getUser: (state) => state.user,
-    isLoggedIn: () => localStorage.getItem('token')
+    isLoggedIn: (state) => Boolean(state.user.email)
   },
   actions: {
     async login(payload) {
@@ -37,12 +37,12 @@ export const useAuthStore = defineStore({
     },
     logout() {
       localStorage.clear()
-      this.email = ""
-      this.id = null
+      this.user.email = ""
+      this.user.id = null
     },
     setCredential(payload) {
-        this.email = payload.email
-        this.id = payload.id
+        this.user.email = payload.email
+        this.user.id = payload.id
         localStorage.setItem('token', JSON.stringify(payload.token))
     }
   }

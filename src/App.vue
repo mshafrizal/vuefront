@@ -1,10 +1,16 @@
 <script>
+import { storeToRefs } from 'pinia'
 import { useAuthStore } from './stores/auth'
+import { useRouter } from 'vue-router'
 export default {
   setup() {
+    const router = useRouter()
     const authStore = useAuthStore()
-    const isLoggedIn = authStore.isLoggedIn
-    const logout = authStore.logout
+    const { isLoggedIn } = storeToRefs(authStore)
+    const logout = () => {
+      authStore.logout()
+      router.push('/login')
+    }
 
     return {
       isLoggedIn,
