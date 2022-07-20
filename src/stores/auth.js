@@ -35,6 +35,11 @@ export const useAuthStore = defineStore({
         this.setCredential({ email: payload.email, id: response.id, token: response.token})
         return response
     },
+    logout() {
+      localStorage.clear()
+      this.email = ""
+      this.id = null
+    },
     setCredential(payload) {
         this.email = payload.email
         this.id = payload.id

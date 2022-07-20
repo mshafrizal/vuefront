@@ -29,6 +29,7 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 export default {
     setup() {
+        localStorage.clear()
         const router = useRouter()
         const authStore = useAuthStore()
         const form = reactive({
