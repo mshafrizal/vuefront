@@ -31,6 +31,7 @@
 <script>
 import { reactive } from '@vue/reactivity'
 import { useBlogStore } from "../../stores/blog"
+import { useBillStore } from "../../stores/bill"
 export default {
   setup() {
     const blogStore = useBlogStore()
@@ -41,6 +42,9 @@ export default {
       summary: "",
       content: "",
     })
+    const billStore = useBillStore()
+    billStore.getBills()
+    const filteredbill = billStore.filteredBill
     async function submit() {
       await blogStore.createBlog(state).then(res => {
         if (res.status === 200) {
@@ -51,6 +55,7 @@ export default {
       }).catch(error => console.log(error))
     }
     return {
+      filteredbill,
       submit,
       state
     }
